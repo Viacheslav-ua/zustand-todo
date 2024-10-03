@@ -1,9 +1,10 @@
+import { Todo } from "../modules/todo/Todo"
 
 export const TodoPage = () => {
   
   return (
-    <div>
-      <h1 className="text-3xl font-bold text-red-500">Todo Page</h1>
+    <div className="bg-[#3F72AF] p-1 h-screen flex items-center justify-center">
+      <Todo />
     </div>
   )
 }
