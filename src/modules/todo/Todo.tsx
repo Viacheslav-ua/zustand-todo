@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useTodoStore } from "./store/useTodoStore"
 
 export const Todo = () => {
@@ -11,9 +12,11 @@ export const Todo = () => {
     // store.removeTask,
 // }))
   
-  console.log(tasks);
-  addTask("test")
+  useEffect(() => {
+    addTask("test")
+  }, [])
   
+  console.log(tasks);
   return (
     <article className="bg-white min-w-[600px] rounded-[20px] px-[55px] pt-[20px] flex items-center justify-center">
       <h1 className="text-[40px] mb-[0.3em]">To Do App</h1>

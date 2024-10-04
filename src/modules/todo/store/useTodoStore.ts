@@ -1,19 +1,8 @@
 import { create } from 'zustand'
-import { v4 as uuidv4 } from 'uuid'
-type Task = {
-  id: string
-  title: string
-  createdAt: number
-}
+import { createId } from '@paralleldrive/cuid2'
+import { TodoStore } from './types'
 
-interface TodoStore {
-  tasks: Task[]
-  addTask: (title: string) => void
-  updateTask: (id: string, title: string) => void
-  removeTask: (id: string) => void
-}
-
-export const useTodoStore = create<TodoStore>((set, get) => ({
+export const useTodoStore = create<TodoStore>((set) => ({
   tasks: [
     {
       id: '1',
@@ -27,20 +16,24 @@ export const useTodoStore = create<TodoStore>((set, get) => ({
     },
   ],
   addTask: (title) => {
-    const { tasks } = get()
     const newTask = {
-      id: uuidv4(),
+      id: createId(),
       title,
       createdAt: Date.now(),
     }
-    console.log("addTaask:",title, tasks);
- 
-
+    set((state) => ({ tasks: [newTask].concat(state.tasks) }))
   },
   updateTask: (id, title) => {
-    
+    set((state) => ({
+      tasks: state.tasks.map((task) => {
+        return {
+          ...task,
+          title: task.id === id ? title : task.title
+        }
+      })
+    }))
   },
   removeTask: (id) => {
-    
+    set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) }))
   },
 }))
