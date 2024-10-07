@@ -25,7 +25,7 @@ export const InputPlus: React.FC<InputPlusProps> = ({ addTask }) => {
         aria-label="Add task"
         title="Add task"
         className='border-none w-[60px] flex justify-center items-center rounded-r-[5px] 
-        bg-[#3f72af] hover:bg-blue-600 transition-all text-white'
+        bg-[#3f72af] hover:opacity-80 transition-opacity text-white'
         ><Plus size={28} /></button>
     </div>
   )
