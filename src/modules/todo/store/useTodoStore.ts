@@ -1,8 +1,9 @@
 import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
 import { createId } from '@paralleldrive/cuid2'
 import { TodoStore } from './types'
 
-export const useTodoStore = create<TodoStore>((set) => ({
+export const useTodoStore = create<TodoStore>()(devtools(persist((set) => ({
   tasks: [
     {
       id: '1',
@@ -36,4 +37,4 @@ export const useTodoStore = create<TodoStore>((set) => ({
   removeTask: (id) => {
     set((state) => ({ tasks: state.tasks.filter((task) => task.id !== id) }))
   },
-}))
+}), { name: 'simple-todo' })))
